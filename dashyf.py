@@ -163,11 +163,39 @@ def drawLog():
     return(fig)
 
 def drawHr():
+    if year==2021:
+        df_hr.to_csv("df_hr.csv")
+        fig, ax=plt.subplots(figsize=(17,10))
+        df_2021=df_hr[df_hr['YearMonth']<'2022-01']
+        bestseller= sns.barplot(
+        data=df_2021,
+        x='YearMonth', y="Total", hue="RANKING", errwidth=0)
+        bestseller.set_title('Top 2 Sellers per Month in 2021', size=20)
+        bestseller.set_ylabel('TOTAL',size=12)
+        bestseller.set_xlabel('MONTHS', size = 12)
+   
+    elif year==2022:
+        df_hr.to_csv("df_hr.csv")
+        bestseller22=df_hr[('2021-12'<df_hr['YearMonth']) & (df_hr['YearMonth']<'2023-01')]
+        bestseller22=sns.barplot(
+        data=bestseller22,
+        x='YearMonth', y="Total", hue="RANKING") 
+        bestseller22.set_title('Top 2 Sellers per Month in 2022', size=20)
+        bestseller22.set_ylabel('TOTAL',size=12)
+        bestseller22.set_xlabel('MONTHS', size = 12)
+        
+    else:
+        df_hr.to_csv("df_hr.csv")
+        plt.figure(figsize=(15,10))
+        bestseller23=df_hr[('2022-12'<df_hr['YearMonth'])]
+        bestseller23=sns.barplot(
+        data=bestseller23,
+        x='YearMonth', y="Total", hue="RANKING")
+        bestseller23.set_title('Top 2 Sellers in the first 2 Months of 2023', size=20)
+        bestseller23.set_ylabel('TOTAL',size=12)
+        bestseller23.set_xlabel('MONTHS', size = 12)
+    return(fig)
 
-df_hr['YearMonth']=pd.to_datetime(df_hr['YearMonth'])
-df_hr['year']=df_hr['YearMonth'].dt.year
-
-df_hr
 #Dashboard Stuff
 
 st.set_page_config(
