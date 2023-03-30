@@ -99,7 +99,7 @@ df_fin1_filt = df_fin1
 def drawFin1(df_fin1_filt):
   df_fin1_filt.to_csv("df_fin1_filt.csv")
   fig_fin1 = plt.figure(figsize=(17,10))
-  turno = sns.barplot(y=df_fin1_filt['country'], x=df_fin1_filt['TotalTurnover'])
+  turno = sns.barplot(y=df_fin1_filt['country'], x=df_fin1_filt['TotalTurnover'],color = palette[0])
   plt.title("Turnover from last two months by country", size=20)
   turno.set(xlabel=None,ylabel=None)
   turno.grid(axis='x', linestyle=':', color='gray')
@@ -108,12 +108,12 @@ def drawFin1(df_fin1_filt):
 
 #df_sales = pd.read_sql_query(query_sales, connection)
 #df_sales.to_csv("df_sales.csv")
+palette = sns.color_palette('Purples_r')
 
 def drawSales(df_sales_filt):
     df_sales_filt.to_csv("df_sales_filt.csv")
     fig_sales= plt.figure(figsize=(17, 10))
     gspec = fig_sales.add_gridspec(ncols=3,nrows=2)
-    palette = sns.color_palette('Purples_r')
 
     ax0 = fig_sales.add_subplot(gspec[0:2,0:2])
     ax1 = fig_sales.add_subplot(gspec[0,2])
@@ -140,8 +140,8 @@ def drawFin2():
 
     df_fin2.to_csv("df_fin2.csv")
     fig, ax=plt.subplots(figsize=(17,10))
-    ax.bar(df_fin2["complete_name"], df_fin2["Total_Order"], label="Total_Order")
-    ax.bar(df_fin2["complete_name"], df_fin2["Total_paied"], label="Total_paied")
+    ax.bar(df_fin2["complete_name"], df_fin2["Total_Order"], label="Total_Order",color = palette[0])
+    ax.bar(df_fin2["complete_name"], df_fin2["Total_paied"], label="Total_paied",color = palette[1])
     width=7
     ax.set_title('Clients that not paid yet')
     ax.set_xlabel('Customer Number')
@@ -154,7 +154,7 @@ def drawLog():
 
     df_log.to_csv("df_log.csv")
     fig, ax = plt.subplots(figsize=(17, 10))
-    ax.bar(df_log['productname'], df_log['total_ordered'], label='Total Ordered')
+    ax.bar(df_log['productname'], df_log['total_ordered'], label='Total Ordered',color = palette[1])
     ax.set_xticklabels(df_log['productname'], rotation=45, ha='right')
     ax.set_xlabel('Product Name')
     ax.set_ylabel('Total Ordered')
