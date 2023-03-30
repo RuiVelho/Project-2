@@ -164,8 +164,10 @@ def drawLog():
 
 def drawHr():
 
-    df_hr.to_csv("df_hr.csv")
+df_hr['YearMonth']=pd.to_datetime(df_hr['YearMonth'])
+df_hr['year']=df_hr['YearMonth'].dt.year
 
+df_hr
 #Dashboard Stuff
 
 st.set_page_config(

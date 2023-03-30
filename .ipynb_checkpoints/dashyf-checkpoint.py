@@ -1,4 +1,4 @@
-#pip install mysqlclient
+#!pip install mysqlclient
 #!pip install jupytext
 import pandas as pd
 import mysql.connector
@@ -110,6 +110,7 @@ def drawSales(df_sales_filt):
     df_sales_filt.to_csv("df_sales_filt.csv")
     fig_sales= plt.figure(figsize=(17, 10))
     gspec = fig_sales.add_gridspec(ncols=3,nrows=2)
+    palette = sns.color_palette('Purples_r')
 
     ax0 = fig_sales.add_subplot(gspec[0:2,0:2])
     ax1 = fig_sales.add_subplot(gspec[0,2])
@@ -117,18 +118,18 @@ def drawSales(df_sales_filt):
 
     ax0.set_xlabel("Product Line", labelpad=10)
     ax0.set_title("Orders this months vs. Previous month",size = 20)
-    ax0.bar(df_sales_filt.productLine,df_sales_filt.totalQuantityOrdered, color = 'darkviolet')
-    ax0.bar(df_sales_filt.productLine,df_sales_filt.previousMonthTotal,bottom = df_sales_filt.totalQuantityOrdered ,color = 'mediumpurple')
+    ax0.bar(df_sales_filt.productLine,df_sales_filt.totalQuantityOrdered, color = palette[0])
+    ax0.bar(df_sales_filt.productLine,df_sales_filt.previousMonthTotal,bottom = df_sales_filt.totalQuantityOrdered ,color = palette[1])
     ax0.legend(["Ordered this month","Ordered previous month"])
     ax0.grid(axis='y', linestyle=':', color='gray')
     ax0.yaxis.set_major_locator(ticker.MultipleLocator(2700/9)) #2700 is a multiple of 9 so don't fuck with it
     ax0.bar_label(ax0.containers[0], label_type='center', padding=3)
     ax0.bar_label(ax0.containers[1], label_type='center', padding=3)
 
-    ax1.pie(df_sales_filt.totalQuantityOrdered, labels = df_sales_filt.productLine.values, autopct='%1.1f%%')
+    ax1.pie(df_sales_filt.totalQuantityOrdered, labels = df_sales_filt.productLine.values, autopct='%1.1f%%',colors = palette)
     ax1.set_title("Sales volume percentage/Product line this month",size = 18)
 
-    ax2.pie(df_sales_filt.previousMonthTotal,labels = df_sales_filt.productLine.values, autopct='%1.1f%%')
+    ax2.pie(df_sales_filt.previousMonthTotal,labels = df_sales_filt.productLine.values, autopct='%1.1f%%',colors = palette)
     ax2.set_title("Previous Month",size = 20)
     return(fig_sales)
 
@@ -146,7 +147,6 @@ def drawFin2():
     plt.legend()
     return(fig)
 
-
 def drawLog():
 
     df_log.to_csv("df_log.csv")
@@ -158,22 +158,16 @@ def drawLog():
     ax.set_title('Top 5 Product Name by Total Ordered')
     ax = df_log.plot(kind='bar', color=['red', 'blue'])
     ax.set_title('Total Orders vs Quantitity in stock')
-    ax.set_xlabel
+    ax.set_xlabel(['productname'], rotation=45, ha='right')
+    ax.set_ylabel('Total Ordered')
     return(fig)
 
 def drawHr():
-    #2021
-    df_hr.to_csv("df_hr.csv")
-    fig, ax=plt.subplots(figsize=(17,10))
-    df_2021=df_hr[df_hr['YearMonth']<'2022-01']
-    bestseller= sns.barplot(
-    data=df_2021,
-    x='YearMonth', y="Total", hue="RANKING", errwidth=0)
-    bestseller.set_title('Top 2 Sellers per Month in 2021', size=20)
-    bestseller.set_ylabel('TOTAL',size=12)
-    bestseller.set_xlabel('MONTHS', size = 12)
-    return(fig)
 
+df_hr['YearMonth']=pd.to_datetime(df_hr['YearMonth'])
+df_hr['year']=df_hr['YearMonth'].dt.year
+
+df_hr
 #Dashboard Stuff
 
 st.set_page_config(
