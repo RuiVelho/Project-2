@@ -95,6 +95,7 @@ plines_ms = [] #Initializing Multiselect jobbies
 df_sales_filt = df_sales 
 countries_ms = []
 df_fin1_filt = df_fin1 
+palette = sns.color_palette('Purples_r')
 
 def drawFin1(df_fin1_filt):
   df_fin1_filt.to_csv("df_fin1_filt.csv")
@@ -108,7 +109,7 @@ def drawFin1(df_fin1_filt):
 
 #df_sales = pd.read_sql_query(query_sales, connection)
 #df_sales.to_csv("df_sales.csv")
-palette = sns.color_palette('Purples_r')
+
 
 def drawSales(df_sales_filt):
     df_sales_filt.to_csv("df_sales_filt.csv")
