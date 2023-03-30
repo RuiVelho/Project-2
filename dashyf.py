@@ -88,6 +88,9 @@ df_fin2 = pd.read_sql_query(query_fin2, connection)
 df_log = pd.read_sql_query(query_log, connection)
 df_hr = pd.read_sql_query(query_hr, connection)
 
+df_hr['YearMonth']=pd.to_datetime(df_hr['YearMonth'])
+df_hr['year']=df_hr['YearMonth'].dt.year
+
 plines_ms = [] #Initializing Multiselect jobbies
 df_sales_filt = df_sales 
 countries_ms = []
@@ -162,7 +165,7 @@ def drawLog():
     ax.set_ylabel('Total Ordered')
     return(fig)
 
-def drawHr():
+def drawHr(year):
     if year==2021:
         df_hr.to_csv("df_hr.csv")
         fig, ax=plt.subplots(figsize=(17,10))
@@ -173,9 +176,11 @@ def drawHr():
         bestseller.set_title('Top 2 Sellers per Month in 2021', size=20)
         bestseller.set_ylabel('TOTAL',size=12)
         bestseller.set_xlabel('MONTHS', size = 12)
+
    
     elif year==2022:
         df_hr.to_csv("df_hr.csv")
+        fig, ax=plt.subplots(figsize=(17,10))
         bestseller22=df_hr[('2021-12'<df_hr['YearMonth']) & (df_hr['YearMonth']<'2023-01')]
         bestseller22=sns.barplot(
         data=bestseller22,
@@ -186,8 +191,9 @@ def drawHr():
         
     else:
         df_hr.to_csv("df_hr.csv")
+        fig, ax=plt.subplots(figsize=(17,10))
         plt.figure(figsize=(15,10))
-        bestseller23=df_hr[('2022-12'<df_hr['YearMonth'])]
+        bestseller23=df_hr[df_hr['YearMonth']>'2022-12']
         bestseller23=sns.barplot(
         data=bestseller23,
         x='YearMonth', y="Total", hue="RANKING")
@@ -236,7 +242,13 @@ elif selecto == 'Logistics':
     fig_log = drawLog()
     st.pyplot(fig_log)
 else:
-    fig_hr = drawHr()
+    years_ms = st.sidebar.radio("Select the Year:", 
+    options=[2021,2022,2023])
+    
+    #mask_hr = df_hr['year'].isin(years_ms)
+    #df_hr_filt = df_hr[mask_hr]
+    
+    fig_hr = drawHr(years_ms)
     st.pyplot(fig_hr)
 
 
