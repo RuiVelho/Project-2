@@ -95,25 +95,26 @@ plines_ms = [] #Initializing Multiselect jobbies
 df_sales_filt = df_sales 
 countries_ms = []
 df_fin1_filt = df_fin1 
+palette = sns.color_palette('Purples_r')
 
 def drawFin1(df_fin1_filt):
   df_fin1_filt.to_csv("df_fin1_filt.csv")
   fig_fin1 = plt.figure(figsize=(17,10))
-  turno = sns.barplot(y=df_fin1_filt['country'], x=df_fin1_filt['TotalTurnover'])
+  turno = sns.barplot(y=df_fin1_filt['country'], x=df_fin1_filt['TotalTurnover'],color = palette[1])
   plt.title("Turnover from last two months by country", size=20)
   turno.set(xlabel=None,ylabel=None)
   turno.grid(axis='x', linestyle=':', color='gray')
-  turno.bar_label(turno.containers[0], label_type='center', padding=3)
+  turno.bar_label(turno.containers[0], label_type='edge', padding=3)
   return(fig_fin1)
 
 #df_sales = pd.read_sql_query(query_sales, connection)
 #df_sales.to_csv("df_sales.csv")
 
+
 def drawSales(df_sales_filt):
     df_sales_filt.to_csv("df_sales_filt.csv")
     fig_sales= plt.figure(figsize=(17, 10))
     gspec = fig_sales.add_gridspec(ncols=3,nrows=2)
-    palette = sns.color_palette('Purples_r')
 
     ax0 = fig_sales.add_subplot(gspec[0:2,0:2])
     ax1 = fig_sales.add_subplot(gspec[0,2])
@@ -140,8 +141,8 @@ def drawFin2():
 
     df_fin2.to_csv("df_fin2.csv")
     fig, ax=plt.subplots(figsize=(17,10))
-    ax.bar(df_fin2["complete_name"], df_fin2["Total_Order"], label="Total_Order")
-    ax.bar(df_fin2["complete_name"], df_fin2["Total_paied"], label="Total_paied")
+    ax.bar(df_fin2["complete_name"], df_fin2["Total_Order"], label="Total_Order",color = palette[0])
+    ax.bar(df_fin2["complete_name"], df_fin2["Total_paied"], label="Total_paied",color = palette[1])
     width=7
     ax.set_title('Clients that not paid yet')
     ax.set_xlabel('Customer Number')
@@ -154,7 +155,7 @@ def drawLog():
 
     df_log.to_csv("df_log.csv")
     fig, ax = plt.subplots(figsize=(17, 10))
-    ax.bar(df_log['productname'], df_log['total_ordered'], label='Total Ordered')
+    ax.bar(df_log['productname'], df_log['total_ordered'], label='Total Ordered',color = palette[1])
     ax.set_xticklabels(df_log['productname'], rotation=45, ha='right')
     ax.set_xlabel('Product Name')
     ax.set_ylabel('Total Ordered')
@@ -168,35 +169,40 @@ def drawLog():
 def drawHr(year):
     if year==2021:
         df_hr.to_csv("df_hr.csv")
+        df_hr['YearMonth']=pd.to_datetime(df_hr['YearMonth'])
+        df_hr['month']=df_hr['YearMonth'].dt.month
         fig, ax=plt.subplots(figsize=(17,10))
         df_2021=df_hr[df_hr['YearMonth']<'2022-01']
         bestseller= sns.barplot(
         data=df_2021,
-        x='YearMonth', y="Total", hue="RANKING", errwidth=0)
+        x='month', y="Total", hue="RANKING", errwidth=0, ax=ax,palette=sns.color_palette('Purples_r'))
         bestseller.set_title('Top 2 Sellers per Month in 2021', size=20)
         bestseller.set_ylabel('TOTAL',size=12)
-        bestseller.set_xlabel('MONTHS', size = 12)
+        bestseller.set_xlabel('MONTHS', size = 12)   
 
-   
     elif year==2022:
         df_hr.to_csv("df_hr.csv")
+        df_hr['YearMonth']=pd.to_datetime(df_hr['YearMonth'])
+        df_hr['month']=df_hr['YearMonth'].dt.month
         fig, ax=plt.subplots(figsize=(17,10))
-        bestseller22=df_hr[('2021-12'<df_hr['YearMonth']) & (df_hr['YearMonth']<'2023-01')]
+        df_2022=df_hr[('2021-12'<df_hr['YearMonth']) & (df_hr['YearMonth']<'2023-01')]
         bestseller22=sns.barplot(
-        data=bestseller22,
-        x='YearMonth', y="Total", hue="RANKING") 
+        data=df_2022,
+        x='month', y="Total", hue="RANKING", ax=ax, palette=sns.color_palette('Purples_r')) 
         bestseller22.set_title('Top 2 Sellers per Month in 2022', size=20)
         bestseller22.set_ylabel('TOTAL',size=12)
         bestseller22.set_xlabel('MONTHS', size = 12)
         
     else:
         df_hr.to_csv("df_hr.csv")
+        df_hr['YearMonth']=pd.to_datetime(df_hr['YearMonth'])
+        df_hr['month']=df_hr['YearMonth'].dt.month
         fig, ax=plt.subplots(figsize=(17,10))
         plt.figure(figsize=(15,10))
-        bestseller23=df_hr[df_hr['YearMonth']>'2022-12']
+        df_2023=df_hr[df_hr['YearMonth']>'2022-12']
         bestseller23=sns.barplot(
-        data=bestseller23,
-        x='YearMonth', y="Total", hue="RANKING")
+        data=df_2023,
+        x='month', y="Total", hue="RANKING", ax=ax, palette=sns.color_palette('Purples_r'))
         bestseller23.set_title('Top 2 Sellers in the first 2 Months of 2023', size=20)
         bestseller23.set_ylabel('TOTAL',size=12)
         bestseller23.set_xlabel('MONTHS', size = 12)
