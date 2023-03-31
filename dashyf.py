@@ -215,7 +215,11 @@ st.set_page_config(
     layout="wide",
 )
 
-st.markdown("<h1 style='text-align: center; color: #7a0099;'>Toy Shop Bop</h1>", unsafe_allow_html=True)   #<----- title)
+st.markdown('''<h1 style='text-align: center; color: #7a0099;'>Toy Shop Bop</h1><style>
+span[data-baseweb="tag"] {
+  background-color: purple !important;
+}
+</style>''', unsafe_allow_html=True)   #<----- title)
 
 options = ['Sales', 'Finances 1', 'Finances 2', 'Logistics', 'Human Resources']
 st.sidebar.header("Choose your KPI")
@@ -256,5 +260,3 @@ else:
     
     fig_hr = drawHr(years_ms)
     st.pyplot(fig_hr)
-
-
