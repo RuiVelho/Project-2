@@ -236,7 +236,7 @@ if selecto == 'Sales':
     fig_sales = drawSales(df_sales_filt)
     st.pyplot(fig_sales)
 elif selecto == 'Finances 1':
-    countries_ms = st.sidebar.multiselect("Select the Product Lines:", 
+    countries_ms = st.sidebar.multiselect("Select the Countries to display:", 
     options=df_fin1['country'].unique(),
     default=df_fin1['country'].unique())
 
