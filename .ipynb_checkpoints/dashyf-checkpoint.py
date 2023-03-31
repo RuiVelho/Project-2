@@ -148,6 +148,8 @@ def drawFin2():
     ax.set_xlabel('Customer Number')
     plt.xticks(rotation=45)
     ax.set_ylabel('Amount')
+    ax.bar_label(ax.containers[0], label_type='edge', padding=3)
+    ax.bar_label(ax.containers[1], label_type='center', padding=3)
     plt.legend()
     return(fig)
 
