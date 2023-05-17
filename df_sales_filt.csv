@@ -1,7 +1,8 @@
 ,productLine,totalQuantityOrdered,previousMonthTotal,difference,rateOfChange
-0,Classic Cars,1294.0,1330.0,36.0,2.71
-1,Vintage Cars,622.0,1244.0,622.0,50.0
-2,Motorcycles,377.0,484.0,107.0,22.11
-3,Trucks and Buses,337.0,735.0,398.0,54.15
-4,Ships,81.0,565.0,484.0,85.66
-5,Trains,79.0,188.0,109.0,57.98
+0,Classic Cars,3513.0,1867.0,-1646.0,-88.16
+1,Vintage Cars,2106.0,1325.0,-781.0,-58.94
+2,Motorcycles,1403.0,728.0,-675.0,-92.72
+3,Planes,1325.0,390.0,-935.0,-239.74
+4,Ships,931.0,345.0,-586.0,-169.86
+5,Trucks and Buses,886.0,750.0,-136.0,-18.13
+6,Trains,177.0,216.0,39.0,18.06
