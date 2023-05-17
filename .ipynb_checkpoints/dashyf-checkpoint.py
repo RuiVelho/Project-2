@@ -8,9 +8,16 @@ import seaborn as sns
 import streamlit as st
 #import jupytext
 
-connection = 'mysql://toyscie:WILD4Rdata!@51.178.25.157:23456/toys_and_models'
-connection = mysql.connector.connect(user = 'toyscie', password='WILD4Rdata!', host='51.178.25.157',port='23456',database='toys_and_models',use_pure=True)
+#connection = 'mysql://toyscie:WILD4Rdata!@51.178.25.157:23456/toys_and_models'
+#connection = mysql.connector.connect(user = 'toyscie', password='WILD4Rdata!', host='51.178.25.157',port='23456',database='toys_and_models',use_pure=True)
 #sql_engine = sql.create_engine(connection)
+
+df_sales_filt=pd.read_csv('Documents/GitHub/Project-2/df_sales_filt.csv')
+df_fin1_filt=pd.read_csv('Documents/GitHub/Project-2/df_fin1_filt.csv')
+df_fin2=pd.read_csv('Documents/GitHub/Project-2/df_fin2.csv')
+df_hr=pd.read_csv('Documents/GitHub/Project-2/df_hr.csv')
+df_log=pd.read_csv('Documents/GitHub/Project-2/df_log.csv')
+
 
 query_sales= '''SELECT 
     p.productLine,
@@ -82,11 +89,11 @@ Where RANKING <3
 Order by YearMonth, RANKING; '''
 
 #Variables
-df_fin1 = pd.read_sql_query(query_fin1, connection)
-df_sales = pd.read_sql_query(query_sales, connection)
-df_fin2 = pd.read_sql_query(query_fin2, connection)
-df_log = pd.read_sql_query(query_log, connection)
-df_hr = pd.read_sql_query(query_hr, connection)
+#df_fin1 = pd.read_sql_query(query_fin1, connection)
+#df_sales = pd.read_sql_query(query_sales, connection)
+#df_fin2 = pd.read_sql_query(query_fin2, connection)
+#df_log = pd.read_sql_query(query_log, connection)
+#df_hr = pd.read_sql_query(query_hr, connection)
 
 df_hr['YearMonth']=pd.to_datetime(df_hr['YearMonth'])
 df_hr['year']=df_hr['YearMonth'].dt.year
