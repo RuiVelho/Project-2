@@ -12,11 +12,11 @@ import streamlit as st
 #connection = mysql.connector.connect(user = 'toyscie', password='WILD4Rdata!', host='51.178.25.157',port='23456',database='toys_and_models',use_pure=True)
 #sql_engine = sql.create_engine(connection)
 
-df_sales_filt=pd.read_csv('Documents/GitHub/Project-2/df_sales_filt.csv')
-df_fin1_filt=pd.read_csv('Documents/GitHub/Project-2/df_fin1_filt.csv')
-df_fin2=pd.read_csv('Documents/GitHub/Project-2/df_fin2.csv')
-df_hr=pd.read_csv('Documents/GitHub/Project-2/df_hr.csv')
-df_log=pd.read_csv('Documents/GitHub/Project-2/df_log.csv')
+df_sales_filt=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/Project-2/main/df_sales_filt.csv')
+df_fin1_filt=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/Project-2/main/df_fin1_filt.csv')
+df_fin2=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/Project-2/main/df_fin2.csv')
+df_hr=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/Project-2/main/df_hr.csv')
+df_log=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/Project-2/main/df_log.csv')
 
 
 query_sales= '''SELECT 
