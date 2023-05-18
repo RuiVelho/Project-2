@@ -1,7 +1,7 @@
 #!pip install mysqlclient
 #!pip install jupytext
 import pandas as pd
-import mysql.connector
+#import mysql.connector
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import seaborn as sns
