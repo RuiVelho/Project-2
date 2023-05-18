@@ -99,9 +99,9 @@ df_hr['YearMonth']=pd.to_datetime(df_hr['YearMonth'])
 df_hr['year']=df_hr['YearMonth'].dt.year
 
 plines_ms = [] #Initializing Multiselect jobbies
-df_sales_filt = df_sales 
+df_sales_filt #= df_sales 
 countries_ms = []
-df_fin1_filt = df_fin1 
+df_fin1_filt #= df_fin1 
 palette = sns.color_palette('Purples_r')
 
 def drawFin1(df_fin1_filt):
@@ -220,10 +220,10 @@ def drawHr(year):
 
 #Dashboard Stuff
 
-st.set_page_config(
-    page_icon=":smiley:",
-    layout="wide",
-)
+#st.set_page_config(
+#    page_icon=":smiley:",
+#    layout="wide",
+
    
 st.markdown('''<h1 style='text-align: center; color: #7a0099;'>Toy Shop Bop</h1><style>span[data-baseweb="tag"] {background-color: purple !important;}
 </style>''', unsafe_allow_html=True) #<----- title)
@@ -234,23 +234,23 @@ selecto = st.sidebar.radio("KPI List", options)
 
 if selecto == 'Sales':
     plines_ms = st.sidebar.multiselect("Select the Product Lines:", 
-    options=df_sales['productLine'].unique(),
-    default=df_sales['productLine'].unique())
+    options=df_sales_filt['productLine'].unique(),
+    default=df_sales_filt['productLine'].unique())
 
-    mask_sales = df_sales['productLine'].isin(plines_ms)
-    df_sales_filt = df_sales[mask_sales]
+    mask_sales = df_sales_filt['productLine'].isin(plines_ms)
+    df_sales_filt_mask= df_sales_filt[mask_sales]
     
-    fig_sales = drawSales(df_sales_filt)
+    fig_sales = drawSales(df_sales_filt_mask)
     st.pyplot(fig_sales)
 elif selecto == 'Finances 1':
     countries_ms = st.sidebar.multiselect("Select the Product Lines:", 
-    options=df_fin1['country'].unique(),
-    default=df_fin1['country'].unique())
+    options=df_fin1_filt['country'].unique(),
+    default=df_fin1_filt['country'].unique())
 
-    mask_fin1 = df_fin1['country'].isin(countries_ms)
-    df_fin1_filt = df_fin1[mask_fin1]
+    mask_fin1 = df_fin1_filt['country'].isin(countries_ms)
+    df_fin1_filt_mask = df_fin1_filt[mask_fin1]
 
-    fig_fin1 = drawFin1(df_fin1_filt)
+    fig_fin1 = drawFin1(df_fin1_filt_mask)
     st.pyplot(fig_fin1)
 elif selecto == 'Finances 2':
     fig_fin2 = drawFin2()

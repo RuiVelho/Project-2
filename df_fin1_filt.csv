@@ -1,13 +1,13 @@
-,TotalTurnover,country
-0,257374.0,USA
-1,176630.0,France
-2,121810.0,Spain
-3,53429.1,Australia
-4,44607.1,Finland
-5,44380.1,Singapore
-6,35826.3,Austria
-7,31670.4,New Zealand
-8,29284.4,Canada
-9,28211.7,Denmark
-10,15183.6,Japan
-11,1627.56,Belgium
+,Unnamed: 0,TotalTurnover,country
+0,0,257374.0,USA
+1,1,176630.0,France
+2,2,121810.0,Spain
+3,3,53429.1,Australia
+4,4,44607.1,Finland
+5,5,44380.1,Singapore
+6,6,35826.3,Austria
+7,7,31670.4,New Zealand
+8,8,29284.4,Canada
+9,9,28211.7,Denmark
+10,10,15183.6,Japan
+11,11,1627.56,Belgium
